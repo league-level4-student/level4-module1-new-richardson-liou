@@ -1,5 +1,7 @@
 package _00_Intro_to_Exceptions;
 
+import javax.swing.JOptionPane;
+
 public class ExceptionsDemo {
 
     /*
@@ -17,6 +19,11 @@ public class ExceptionsDemo {
         if (x < 5) {
             // This is where the Exception is actually thrown.
             throw new Exception();
+        }
+    }
+    public static void testPositive(int number) throws NegativeNumberException {
+        if (number < 0) {
+            throw new NegativeNumberException();
         }
     }
 
@@ -39,12 +46,28 @@ public class ExceptionsDemo {
     public static void main(String[] args) {
 
         // 1. Create a try/catch block (Hint: type "try" and ctrl + space).
-
+    	try {
+			testFiveOrGreater(4);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+        try {
+            // Task 8
+            testPositive(-2);
+        } catch (NegativeNumberException e) {
+            // Task 9
+            e.scaryPopup();
+        } finally {
+            // Task 12
+            JOptionPane.showMessageDialog(null, "Your computer is okay.");
+        }
+    }
         /*
          * 2. Call the testFiveOrGreater method with a value less than 5 inside
          * the try block.
          */
-
+    	
         /*
          * 3. Call e.printStackTrace() in the catch block. This prints out the
          * last methods called during your program's execution to the console in
@@ -63,6 +86,15 @@ public class ExceptionsDemo {
      * JOptionPane Message Dialog telling the user they have triggered a
      * critical error in their computer.
      */
+    class NegativeNumberException extends Exception {
+        public void scaryPopup() {
+            JOptionPane.showMessageDialog(null, "Critical error in your computer!");
+        }
+    }
+
+
+        
+
 
     /*
      * 7. Create a static method in this class called testPositive. It should
@@ -99,4 +131,4 @@ public class ExceptionsDemo {
      * 13. Try running the program with values that both throw and don't throw
      * exceptions.
      */
-}
+
